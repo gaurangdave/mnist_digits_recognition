@@ -83,33 +83,14 @@ http://localhost:8000/docs
 
 ## API Reference
 
-| Action                                           | HTTP Method | Endpoint                                 |
-|--------------------------------------------------|-------------|------------------------------------------|
-| List available models                            | **`GET`**       | `/models`                                |
-| Get predictions using a certain model            | **`POST`**      | `/models/{model_id}/predict`             |
-| Get predictions from all models                  | **`POST`**      | `/models/predict_all`                    |
-| Get predictions with actual values for accuracy  | **`POST`**      | `/models/{model_id}/predict_with_actuals`|
-
 ## Visualizations
-![Actual Values vs Predictions](https://github.com/gaurangdave/house_price_predictions/blob/8f1dbec1293f2403db4c9cc221b332662a082970/reports/figures/final_predictions_vs_actual_values.png?raw=true "A visualization showing performance of ML model on test data")
 
 
 ## Project Insights
-* The final model achieved a **Relative RMSE of 19.85%**, which is a significant improvement over the current manual process, where estimates deviate by more than **30%**.
-* This represents an approximate **33% improvement** in prediction accuracy compared to the manual approach.
-* The scatter plot of predictions vs. actual values shows an overall **linear relationship**, indicating that the model is reasonably accurate in predicting housing prices.
-For **low to mid-range prices (under 300K)**, predictions align closely with actual values.However, as prices increase, there is a tendency for predictions to fall below the ideal line, suggesting that the model struggles with higher price ranges.
-* The concentration of points near the **500K mark** reflects the upper cap in the dataset, which likely limits the model’s ability to predict higher values accurately.
 
 ### Next Steps
-* Explore **feature engineering** to add new features that may correlate with higher housing prices, potentially improving performance for higher price ranges.
-* Experiment with **more complex models** (e.g., gradient boosting or neural networks) to capture nonlinear relationships that the current model might be missing.
 
 ## Lessons Learnt
-* Gained experience in **identifying data distributions** and applying appropriate preprocessing techniques for machine learning training.
-* Learned about **cluster similarity** and methods for measuring similarity between different feature types.
-* Developed skills in creating **preprocessing pipelines** using scikit-learn’s Pipeline and custom transformers.
-* Built knowledge on how to **deploy trained models as APIs** using FastAPI, allowing for seamless integration of predictions into applications.
 
 ## 🚀 About Me
 
