@@ -1,36 +1,45 @@
-# House Price Prediction
+# MNIST Digits Recognition
 
 ## Project Goal
 
+The goal of this project is to build an end-to-end application that recognizes handwritten digits using the MNIST dataset. The application will allow users to draw digits (or provide handwritten digit images) and predict the digit using a trained machine learning model. This involves:
+1. Training a machine learning model to recognize digits (0-9) from the MNIST dataset.
+1. Creating a user-friendly web application where:
+	* Users can input a handwritten digit using a canvas or upload an image.
+	* The application predicts the digit based on the trained model.
 
 ## Solution Details
 
-
 ### Performance Measure
-
 
 ### Data Transformation
 
 ### Dataset
 
-
 ### Notebooks
 
 ### Models
 
-
 ## Tech Stack
 
-![Environment](https://img.shields.io/badge/Environment-Linux_64-FCC624?logo=linux&style=for-the-badge)
-![Conda](https://img.shields.io/badge/Conda-24.9.1-342B029?logo=Anaconda&style=for-the-badge)
-![Jupyter](https://img.shields.io/badge/Jupyter-2.14.0-F37626?logo=Jupyter&logoColor=F37626&style=for-the-badge)
-![Python](https://img.shields.io/badge/Python-3.12.2-FFD43B?logo=Python&logoColor=blue&style=for-the-badge)
-![Pandas](https://img.shields.io/badge/Pandas-2.2.2-2C2D72?logo=Pandas&logoColor=2C2D72&style=for-the-badge)
-![Plotly](https://img.shields.io/badge/Plotly-5.24.1-239120?logo=Plotly&logoColor=239120&style=for-the-badge)
-![Scikit Learn](https://img.shields.io/badge/scikit_learn-1.5.1-F7931E?logo=scikit-learn&logoColor=F7931E&style=for-the-badge)
-![FastAPI](https://img.shields.io/badge/FastAPI-0.115.0-109989?logo=Fastapi&logoColor=109989&style=for-the-badge)
+![Environment](https://img.shields.io/badge/Environment-Google_Colab-FCC624?logo=googlecolab&style=for-the-badge)  
+![Python](https://img.shields.io/badge/Python-3.12.2-FFD43B?logo=Python&logoColor=blue&style=for-the-badge)  
+![Pandas](https://img.shields.io/badge/Pandas-2.2.2-2C2D72?logo=Pandas&logoColor=2C2D72&style=for-the-badge)  
+![Plotly](https://img.shields.io/badge/Plotly-5.24.1-239120?logo=Plotly&logoColor=239120&style=for-the-badge)  
+![Scikit Learn](https://img.shields.io/badge/scikit_learn-1.5.1-F7931E?logo=scikit-learn&logoColor=F7931E&style=for-the-badge)  
+![TensorFlow](https://img.shields.io/badge/TensorFlow-2.12.0-FF6F00?logo=TensorFlow&logoColor=FF6F00&style=for-the-badge)  
+![Google Colab](https://img.shields.io/badge/Notebook-Google_Colab-FCC624?logo=googlecolab&style=for-the-badge)  
+![FastAPI](https://img.shields.io/badge/FastAPI-0.115.0-109989?logo=Fastapi&logoColor=109989&style=for-the-badge)  
 
-## Installation
+### Tools and Platforms:
+1. **Google Colab**: Used for data exploration, training, and evaluation of the digit recognition model.  
+2. **Python**: Primary programming language for machine learning, data preprocessing, and API development.  
+3. **Scikit-learn**: For data preprocessing and building classical ML models.  
+4. **TensorFlow**: For building and training deep learning models (if needed for improved performance).  
+5. **Plotly**: For creating interactive visualizations during the analysis phase.  
+6. **FastAPI**: For exposing the trained model as an API and building backend services.  
+
+## Installation (For Local Development)
 
 - Create conda environment with `Python 3.12`
 
@@ -84,7 +93,6 @@ http://localhost:8000/docs
 ## API Reference
 
 ## Visualizations
-
 
 ## Project Insights
 
