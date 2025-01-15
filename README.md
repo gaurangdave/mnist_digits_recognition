@@ -160,6 +160,19 @@ uvicorn api.main:app --reload
 http://localhost:8000/docs
 ```
 
+## Running API Test Cases
+* Run the following command to run all the test cases
+```bash
+pytest
+```
+
+* Run the following command to run a specific test case
+  * Here `test_predict_digit_endpoint` is the name of test case in `tests/test_api.py` file.
+```bash
+pytest -k test_predict_digit_endpoint
+```
+
+
 ## API Reference
 
 ## Visualizations
