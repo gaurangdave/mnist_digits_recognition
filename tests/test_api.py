@@ -17,7 +17,7 @@ def test_predict_digit_endpoint():
     payload = {"pixels": [[0.0] * 28] * 28}  # Example 28x28 input
     response = client.post("/predict", json=payload)
     assert response.status_code == 200
-    assert "digit" in response.json()
+    assert "prediction" in response.json()
 
 
 def test_predict_digit_with_valid_input():
@@ -33,5 +33,5 @@ def test_predict_digit_with_valid_input():
     payload = {"pixels": pixels}
     response = client.post("/predict", json=payload)
     assert response.status_code == 200
-    assert "digit" in response.json()
-    # assert response.json()["digit"] == target
+    assert "prediction" in response.json()
+    assert response.json()["prediction"] == target

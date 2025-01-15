@@ -1,6 +1,8 @@
 from api.schemas.digit_data import DigitData
 from fastapi import FastAPI
 
+from api.utils.models import load_model_and_predict
+
 app = FastAPI(title="MNIST Digit Recognizer API",
               description="API for MNIST Digit Recognizer", version="0.1")
 
@@ -13,4 +15,5 @@ def read_root():
 @app.post("/predict")
 def predict_digit(data: DigitData):
     # Load the model, preprocess input, and make prediction
-    return {"digit": 7}  # Placeholder response
+    return load_model_and_predict(data)
+    # return {"digit": 7}  # Placeholder response
