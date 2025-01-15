@@ -143,6 +143,11 @@ conda install conda-forge::python-dotenv
 ```bash
 conda install -c conda-forge fastapi uvicorn -y
 ```
+## Training Model for API
+* Run the following command to train model(s) for production use
+```bash
+python -m api.utils.training
+```
 ## Running the API
 * Run the following command to start the API server
 
