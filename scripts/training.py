@@ -1,6 +1,5 @@
-from api.utils.preprocessing import preprocess_data
 from api.utils.common import save_model, download_from_google_drive
-from sklearn.preprocessing import FunctionTransformer, MinMaxScaler
+from sklearn.preprocessing import MinMaxScaler
 from sklearn.pipeline import Pipeline
 from sklearn.svm import SVC
 from pathlib import Path
@@ -30,26 +29,24 @@ def train_svc(features, target):
     svc_pipeline.fit(features, target)
 
     # save the model
-    save_model(svc_pipeline, "svc_prod_v1.joblib")
+    save_model(svc_pipeline, "svc_prod_v3.joblib")
 
 
 if __name__ == "__main__":
     # check if mnist data is already downloaded
-    mnist_train_set_path = Path("api", "data", "mnist_train_set.csv")
-    mnist_test_set_path = Path("api", "data", "mnist_test_set.csv")
+    mnist_train_set_path = Path("data", "mnist_train_set.csv")
+    mnist_test_set_path = Path("data", "mnist_test_set.csv")
 
     if not mnist_train_set_path.exists():
         print("Downloading MNIST training data...")
         # download train set
         file_id = "1Rho1umzwBQTodR7sXVCdUZsJE7xq9EmM"
-        # data_dir = str(Path("..", "data", "mnist_train_set.csv"))
         download_from_google_drive(file_id, str(mnist_train_set_path))
 
     if not mnist_test_set_path.exists():
         print("Downloading MNIST test data...")
         # download test set
         file_id = "1qxd-M96DJpYXHfO8xf_XKdDHr3o0xMUE"
-        # data_dir = str(Path("..", "data", "mnist_test_set.csv"))
         download_from_google_drive(file_id, str(mnist_test_set_path))
 
     # access train data

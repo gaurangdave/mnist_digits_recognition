@@ -12,13 +12,13 @@ def load_model(model_path):
 
 
 def read_input_from_file():
-    input_file = Path("api", "data", "user_prediction")
+    input_file = Path("data", "user_prediction")
     input_data = pd.read_csv(input_file)
     return input_data
 
 
 def load_model_and_predict(df):
-    model_path = Path("api", "models", "svc_prod_v1.joblib")
+    model_path = Path("models", "svc_prod_v1.joblib")
     model = load_model(str(model_path))
     try:
         model_prediction = model.predict(df)

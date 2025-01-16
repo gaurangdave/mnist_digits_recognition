@@ -8,7 +8,7 @@ matplotlib.use("Agg")  # Use the Agg backend for non-GUI environments
 
 
 # helper function to save the model metrics to google drive
-models_path = Path("api", "models")
+models_path = Path("models")
 
 
 def save_comparison_df(comparison_df):
@@ -21,7 +21,7 @@ def save_comparison_df(comparison_df):
 def save_model(estimator, file_name):
     # model path
     print(f"Saving model... {file_name}")
-    model_path = Path("api", "models", file_name)
+    model_path = Path("models", file_name)
     dump(estimator, str(model_path))
 
 

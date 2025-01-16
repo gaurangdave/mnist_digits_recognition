@@ -2,7 +2,6 @@ from sklearn.preprocessing import Binarizer, MinMaxScaler
 import pandas as pd
 from pathlib import Path
 from api.schemas.digit_data import DigitData
-from api.utils.common import save_image_from_dataframe
 
 
 def preprocess_data(data, method="none", threshold=128):
@@ -47,8 +46,7 @@ def convert_prediction_request_to_dataframe(data: DigitData):
     df = pd.DataFrame([input_data])
 
     # Save the exact DataFrame we'll use for prediction
-    prediction_request_file = Path(
-        "api", "data", "user_prediction_request.csv")
+    prediction_request_file = Path("data", "user_prediction_request.csv")
     if prediction_request_file.exists():
         df.to_csv(prediction_request_file, mode="a", header=False, index=False)
     else:
