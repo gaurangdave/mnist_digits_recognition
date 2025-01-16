@@ -185,6 +185,14 @@ pytest -k test_predict_digit_endpoint
 
 ## Visualizations
 
+### Metric Comparison Of Various Models
+![image](https://github.com/user-attachments/assets/e1f295d4-3dcf-4aa0-b5f3-dd30a1f61186)
+
+### Confusion Matrix for Production Model against test data
+![test_validation](https://github.com/user-attachments/assets/5ff76a3b-9bf8-40bb-8582-3fefdcfd3170)
+
+### Confusion Matrix specifying errors of Production Model against test data
+![test_validation_errors](https://github.com/user-attachments/assets/4bb9f081-df3b-4b0e-8b2d-beea41ccb041)
 
 ## Project Insights
 
