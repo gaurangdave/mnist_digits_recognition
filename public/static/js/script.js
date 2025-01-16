@@ -84,6 +84,7 @@ document.getElementById("predict-button").addEventListener("click", () => {
         .then(response => response.json())
         .then(result => {
             console.log(`Prediction: ${result.prediction}`);
+            document.getElementById("prediction").innerText = `${result.prediction}`;
         })
         .catch(error => {
             console.error("Error:", error);
