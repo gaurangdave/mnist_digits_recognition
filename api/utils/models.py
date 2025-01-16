@@ -1,22 +1,28 @@
 from http.client import HTTPException
 import joblib
 import numpy as np
+import pandas as pd
 from api.schemas.digit_data import DigitData
+from pathlib import Path
 
 
-def load_model_and_predict(data: DigitData):
-    model_path = "api/models/svc_prod.joblib"
+def load_model(model_path):
     model = joblib.load(model_path)
+    return model
+
+
+def read_input_from_file():
+    input_file = Path("api", "data", "user_prediction")
+    input_data = pd.read_csv(input_file)
+    return input_data
+
+
+def load_model_and_predict(df):
+    model_path = Path("api", "models", "svc_prod_v1.joblib")
+    model = load_model(str(model_path))
     try:
-        # Step 1: Convert the payload to a NumPy array
-        # Reshape to (1, 784) for a single digit
-        input_array = np.array(data.pixels).reshape(1, -1).copy()
-        # Step 2: Make prediction
-        probabilities = model.predict_proba(input_array)
-        # Step 3: Convert probabilities to class
-        prediction = np.argmax(probabilities, axis=1)[0]
-        # Step 4: Return the prediction
-        return {"prediction": int(prediction)}
+        model_prediction = model.predict(df)
+        return {"prediction": int(model_prediction[0])}
     except Exception as e:
         print(f"Error: {e}")
         raise HTTPException()

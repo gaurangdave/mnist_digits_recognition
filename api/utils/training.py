@@ -1,6 +1,6 @@
 from api.utils.preprocessing import preprocess_data
 from api.utils.common import save_model, download_from_google_drive
-from sklearn.preprocessing import FunctionTransformer
+from sklearn.preprocessing import FunctionTransformer, MinMaxScaler
 from sklearn.pipeline import Pipeline
 from sklearn.svm import SVC
 from pathlib import Path
@@ -21,8 +21,7 @@ def train_svc(features, target):
     # create pipeline
     print("Creating pipeline...")
     svc_pipeline = Pipeline([
-        ("preprocessing", FunctionTransformer(
-            preprocess_data, kw_args={"method": "normalize"})),
+        ("scaler", MinMaxScaler()),
         ("svc", svc)
     ], verbose=True)
 
@@ -31,7 +30,7 @@ def train_svc(features, target):
     svc_pipeline.fit(features, target)
 
     # save the model
-    save_model(svc_pipeline, "svc_prod.joblib")
+    save_model(svc_pipeline, "svc_prod_v1.joblib")
 
 
 if __name__ == "__main__":

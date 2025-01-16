@@ -1,12 +1,8 @@
-from joblib import dump
 from sklearn.preprocessing import Binarizer, MinMaxScaler
-
-
-from sklearn.metrics import f1_score, roc_auc_score, accuracy_score
-
-
 import pandas as pd
-# helper function to calculate per class f1 scores
+from pathlib import Path
+from api.schemas.digit_data import DigitData
+from api.utils.common import save_image_from_dataframe
 
 
 def preprocess_data(data, method="none", threshold=128):
@@ -21,9 +17,16 @@ def preprocess_data(data, method="none", threshold=128):
         pd.DataFrame: Preprocessed dataset.
     """
     if method == "normalize":
+        if len(data) == 1:
+            print("Single-row input detected. Skipping normalization.")
+            return data
+        print("Normalizing data...")
         scaler = MinMaxScaler()
         transformed_data = scaler.fit_transform(data)
-        return pd.DataFrame(transformed_data)
+        transfored_df = pd.DataFrame(transformed_data)
+        print(f"transfored_df Min: {transfored_df.min().min()}, Max: {
+              transfored_df.max().max()}")
+        return transfored_df
     elif method == "binarize":
         binarizer = Binarizer(threshold=threshold)
         transformed_data = binarizer.fit_transform(data)
@@ -34,64 +37,32 @@ def preprocess_data(data, method="none", threshold=128):
     return pd.DataFrame(data)
 
 
-def per_class_f1_score(actual_classes, prediction_classes):
-    # Compute F1 scores for each class directly
-    f1_scores = f1_score(actual_classes, prediction_classes, average=None)
-    # Create a list of dictionaries for output
-    per_class_f1_scores = [{"class": i, "f1_score": score}
-                           for i, score in enumerate(f1_scores)]
-
-    return per_class_f1_scores
-
-
-def update_model_comparison(probabilities, true_labels, algorithm, method, filename, comparison_df=None):
+def convert_prediction_request_to_dataframe(data: DigitData):
     """
-    Updates the model comparison DataFrame with metrics for a given model.
-
-    Args:
-        probabilities (ndarray): Probabilities or predicted values for the dataset.
-        true_labels (Series or ndarray): True labels for the dataset.
-        algorithm (str): Name of the algorithm (e.g., 'Logistic Regression').
-        method (str): Method used (e.g., 'Default Params', 'Grid Search').
-        filename (str): Name of the file to save the model.
-        comparison_df (DataFrame or None): Existing comparison DataFrame. If None, a new one is created.
-
-    Returns:
-        DataFrame: Updated comparison DataFrame with metrics for the given model.
+    Convert the prediction request to a DataFrame.
     """
+    # First flatten the 2D array to 1D
+    flattened_pixels = [pixel for row in data.pixels for pixel in row]
 
-    # Get predicted classes (argmax for probabilities)
-    predicted_classes = probabilities.argmax(axis=1)
+    # Create DataFrame with pixel columns
+    input_data = {f"pixel{i+1}": v for i, v in enumerate(flattened_pixels)}
+    df = pd.DataFrame([input_data])
 
-    # Compute metrics
-    accuracy = accuracy_score(true_labels, predicted_classes)
-    weighted_f1 = f1_score(true_labels, predicted_classes, average='weighted')
-    roc_score = roc_auc_score(true_labels, probabilities, multi_class="ovr")
-    # Compute per-class F1 scores
-    per_class_f1_scores = f1_score(
-        true_labels, predicted_classes, average=None)
-    per_class_f1_dict = {f"Class_{i}": score for i,
-                         score in enumerate(per_class_f1_scores)}
+    # Debug prints
+    print("DataFrame shape:", df)
+    print("Sample of first 10 pixels:", df.iloc[0, :10].values)
+    print("Number of non-zero pixels:", (df != 0).sum().sum())
 
-    # Create a new row with metrics
-    new_row = {
-        "Algorithm": algorithm,
-        "Method": method,
-        "File Name": filename,
-        "Accuracy": accuracy,
-        "Weighted F1 Score": weighted_f1,
-        "ROC AUC Score": roc_score,
-        **per_class_f1_dict,  # Unpack per-class F1 scores
-    }
+    # Save the exact DataFrame we'll use for prediction
+    prediction_request_file = Path(
+        "api", "data", "user_prediction_request.csv")
+    if prediction_request_file.exists():
+        df.to_csv(prediction_request_file, mode="a", header=False, index=False)
+    else:
+        df.to_csv(prediction_request_file, mode="w", header=True, index=False)
 
-    # Initialize or update the DataFrame
-    if comparison_df is None:
-        return pd.DataFrame([new_row])
+    # # Verify the data is in the correct format for the model
+    # if df.shape[1] != 784:
+    #     raise ValueError(f"Expected 784 features, got {df.shape[1]}")
 
-    # Append the new row
-    comparison_df = pd.concat(
-        [comparison_df, pd.DataFrame([new_row])], ignore_index=True)
-
-    return comparison_df
-
-
+    return df
