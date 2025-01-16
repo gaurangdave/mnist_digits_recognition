@@ -19,7 +19,7 @@ To evaluate and compare models, the following metrics were used:
 - **Class-wise F1 Score**: To analyze performance for individual classes.
 - **Confusion Matrix**: To identify specific misclassifications and analyze errors. 
 
-### 🛠 Data Transformation
+### 🚧 Data Transformation
 The MNIST dataset was preprocessed using **Normalization** to scale pixel intensity values between 0 and 1.
 
 ### 📂 Dataset
@@ -71,7 +71,7 @@ Production Model:
 ![Google Colab](https://img.shields.io/badge/Notebook-Google_Colab-FCC624?logo=googlecolab&style=for-the-badge)  
 ![FastAPI](https://img.shields.io/badge/FastAPI-0.115.0-109989?logo=Fastapi&logoColor=109989&style=for-the-badge)  
 
-### Tools and Platforms:
+### 🛠️ Tools and Platforms:
 1. **Google Colab**: Used for data exploration, training, and evaluation of the digit recognition model.  
 2. **Python**: Primary programming language for machine learning, data preprocessing, and API development.  
 3. **Scikit-learn**: For data preprocessing and building classical ML models.  
@@ -80,7 +80,7 @@ Production Model:
 6. **FastAPI**: For exposing the trained model as an API and building backend services.  
 
 
-## Setting Up Secrets in Google Colab
+## ⚙️ Setting Up Secrets in Google Colab
 
 * To run this project on Google Colab securely, you will need to set up a secret to store the shared Google Drive folder path. 
 * This ensures your intermediate data storage path is not exposed when sharing notebooks.
@@ -227,7 +227,7 @@ pytest -k test_predict_digit_endpoint
 #### Prediction
 ![alt text](image-1.png)
 
-## Visualizations
+## 📈 Visualizations
 
 ### Metric Comparison Of Various Models
 ![image](https://github.com/user-attachments/assets/e1f295d4-3dcf-4aa0-b5f3-dd30a1f61186)
@@ -238,18 +238,18 @@ pytest -k test_predict_digit_endpoint
 ### Confusion Matrix specifying errors of Production Model against test data
 ![test_validation_errors](https://github.com/user-attachments/assets/4bb9f081-df3b-4b0e-8b2d-beea41ccb041)
 
-## Project Insights
+## 📊 Project Insights
 * The final model achieved a `Weighted F1 Score` of `0.98` and `Accuracy` of `0.98` 
 * We were also able to acheive an average classbased `F1` score of `0.98`, which means our model has a balanced `Precision` and `Recall`, which means we have high `True Positive` rates and low `False Negative` rates. 
 * Our model still makes errors in some classification, 
   * e.g. `53%` of misclassified 6 is classified as 0 and `54%` of misclassified 4s are classified as 9s. 
   * Similarly there is higher rate of misclassification between 3, 5 and 8 and hypothesis is this could be because of similarity of these digits in hand written format. 
 
-### Next Steps
+### 👣 Next Steps
 1.	Train the model with augmented data to improve performance.
 2.	Explore deep learning models like CNNs for potentially better accuracy.
 
-## Lessons Learnt
+## 🏫 Lessons Learnt
 * Improved understanding of **classification algorithms**, metrics, and error analysis.
 * Learned data exploration techniques for image data.
 * Debugged and resolved a production issue with the normalization pipeline, gaining valuable insight into E2E system testing.
