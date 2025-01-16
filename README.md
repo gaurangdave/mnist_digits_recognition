@@ -11,24 +11,39 @@ The goal of this project is to build an end-to-end application that recognizes h
 ## Solution Details
 
 ### Performance Measure
+* We used the following metrices to measure the performance of our model,
+  * `Weighted F1 Score` - To achieve balanced `Precision` and `Recall` for the predictions
+  * `Accuracy` -  To achieve higher `True Positive` and `True Negative` rates
+  * `Class Wise F1 Score` - To track and understand how well the model discriminates between different classes. 
+* Apart from that we also used `Confusing Matrix` to understand each model's errors. 
 
 ### Data Transformation
+* Since the dataset was downloaded from `MNIST`, it just required `Normalization` before training and prediction. 
 
 ### Dataset
+* The `MNIST` dataset can be accessed from `sklearn` as follows
+```
+from sklearn.datasets import fetch_openml
+mnist = fetch_openml("mnist_784", as_frame=False)
+```
+* The `train` and `test` set used for training and validation, as well as augmented data set can be accessed from public `Google Drive` folder [here](https://drive.google.com/drive/folders/10FmschultsicypMnWv-uI957F35P2ro5).
 
 ### Notebooks
 * [00_get_data.ipynb](https://github.com/gaurangdave/mnist_digits_recognition/blob/main/notebooks/00_get_data.ipynb) to download the dataset and create local copy. <a href="https://colab.research.google.com/github/gaurangdave/mnist_digits_recognition/blob/main/notebooks/00_get_data.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 
 * [01_explore_data.ipynb](https://github.com/gaurangdave/mnist_digits_recognition/blob/main/notebooks/01_explore_data.ipynb) to create train/test set and data exploration.<a href="https://colab.research.google.com/github/gaurangdave/mnist_digits_recognition/blob/main/notebooks/01_explore_data.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 
-* [02_transform_data.ipynb](https://github.com/gaurangdave/mnist_digits_recognition/blob/main/notebooks/02_transform_data.ipynb) for data transformation.<a href="https://colab.research.google.com/github/gaurangdave/mnist_digits_recognition/blob/main/notebooks/02_transform_data.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+* [02_training_evaluation_colab.ipynb](https://github.com/gaurangdave/mnist_digits_recognition/blob/main/notebooks/02_training_evaluation_colab.ipynb) for data training and evaluation on Google Colab.<a href="https://colab.research.google.com/github/gaurangdave/mnist_digits_recognition/blob/main/notebooks/02_transform_data.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 
-* [03_training_evaluation.ipynb](https://github.com/gaurangdave/mnist_digits_recognition/blob/main/notebooks/03_training_evaluation.ipynb) training and evaluation.<a href="https://colab.research.google.com/github/gaurangdave/mnist_digits_recognition/blob/main/notebooks/03_training_evaluation.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
-
-* [04_download_models.ipynb](https://github.com/gaurangdave/mnist_digits_recognition/blob/main/notebooks/04_download_models.ipynb) to download all the existing trained models.<a href="https://colab.research.google.com/github/gaurangdave/mnist_digits_recognition/blob/main/notebooks/04_download_models.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+* [03_training_evaluation_local.ipynb](https://github.com/gaurangdave/mnist_digits_recognition/blob/main/notebooks/03_training_evaluation_local.ipynb) for data training and evaluation on local machine.
 
 ### Models
-
+* The production model that we use is app is trained using `Support Vector Classifier`, which gives us `Weighted F1 Score` of `0.981675` and `Accuracy` of `0.981679`. 
+* This model was trained using normalized data and the following hyperparams,
+  * `kernel` = `rbf`
+  * `C` = 10
+  * `gamma` = `scale`
+* All the trained models including the production one can be accessed in this public `Google Drive` [folder](https://drive.google.com/drive/folders/10GxWYi3NkoZv1Zba9yQ2y88TRM5-xKJG). 
 ## Tech Stack
 
 ![Environment](https://img.shields.io/badge/Environment-Google_Colab-FCC624?logo=googlecolab&style=for-the-badge)  
@@ -175,13 +190,23 @@ pytest
 pytest -k test_predict_digit_endpoint
 ```
 
-
 ## API Reference
 
 | Action                                           | HTTP Method | Endpoint                                 |
 |--------------------------------------------------|-------------|------------------------------------------|
 | Get predictions using                            | **`POST`**  | `/predict`                               |
 
+## Accessing UI
+
+* To access the UI application, simply go to `http://localhost:8000` after starting the server and you should be able to access the webapp. 
+
+### App Screenshots
+
+#### Default Home Page
+![alt text](image.png)
+
+#### Prediction
+![alt text](image-1.png)
 
 ## Visualizations
 
@@ -195,10 +220,21 @@ pytest -k test_predict_digit_endpoint
 ![test_validation_errors](https://github.com/user-attachments/assets/4bb9f081-df3b-4b0e-8b2d-beea41ccb041)
 
 ## Project Insights
+* The final model achieved a `Weighted F1 Score` of `0.98` and `Accuracy` of `0.98` 
+* We were also able to acheive an average classbased `F1` score of `0.98`, which means our model has a balanced `Precision` and `Recall`, which means we have high `True Positive` rates and low `False Negative` rates. 
+* Our model still makes errors in some classification, 
+  * e.g. `53%` of misclassified 6 is classified as 0 and `54%` of misclassified 4s are classified as 9s. 
+  * Similarly there is higher rate of misclassification between 3, 5 and 8 and hypothesis is this could be because of similarity of these digits in hand written format. 
 
 ### Next Steps
+* Training a model using the augmented data to see if we can further improve the performance.  Right now training using augmented data, was resource intensive and didn't reach convergence for a long time. 
+* Experimenting with `Deep Learning` models. 
 
 ## Lessons Learnt
+* Gained experience in `Classification Algorightm`, various classification performance metrics and error analytics.
+* Leart about data exploration for image data in `pixels` and `intencities`.
+* Got familiarity with concepts `Kernel Trick` and fitting linear vs non linear data. 
+* Ran into a very interesting bug while using the final model in production, and learnt how a fit and transform in production pipeline can result into prediction errors. 
 
 ## 🚀 About Me
 
