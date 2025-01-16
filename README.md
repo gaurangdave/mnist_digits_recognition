@@ -144,10 +144,13 @@ conda install conda-forge::python-dotenv
 conda install -c conda-forge fastapi uvicorn -y
 ```
 ## Training Model for API
+
 * Run the following command to train model(s) for production use
+
 ```bash
-python -m api.utils.training
+python -m scripts.training
 ```
+
 ## Running the API
 * Run the following command to start the API server
 
@@ -175,7 +178,13 @@ pytest -k test_predict_digit_endpoint
 
 ## API Reference
 
+| Action                                           | HTTP Method | Endpoint                                 |
+|--------------------------------------------------|-------------|------------------------------------------|
+| Get predictions using                            | **`POST`**  | `/predict`                               |
+
+
 ## Visualizations
+
 
 ## Project Insights
 
