@@ -69,6 +69,7 @@ document.getElementById("clear-button").addEventListener("click", () => {
     ctx.fillStyle = "black"; // Black background
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     ctx.beginPath();
+    document.getElementById("prediction").innerText = "?";
 });
 
 // predict digit
