@@ -1,50 +1,66 @@
 # MNIST Digits Recognition
 
-## Project Goal
+## 📌 Project Goal
 
-The goal of this project is to build an end-to-end application that recognizes handwritten digits using the MNIST dataset. The application will allow users to draw digits (or provide handwritten digit images) and predict the digit using a trained machine learning model. This involves:
-1. Training a machine learning model to recognize digits (0-9) from the MNIST dataset.
-1. Creating a user-friendly web application where:
-	* Users can input a handwritten digit using a canvas or upload an image.
+The goal of this project is to build an **end-to-end application** for recognizing handwritten digits using the MNIST dataset.
+
+Key Features:
+1. **Model Training** : A machine learning model is trained to recognize digits (0-9) from the MNIST dataset.
+2. **Interactive Web Application** :
+	* Users can draw a handwritten digit using a canvas or upload an image.
 	* The application predicts the digit based on the trained model.
 
-## Solution Details
+## 🎯 Solution Details
 
-### Performance Measure
-* We used the following metrices to measure the performance of our model,
-  * `Weighted F1 Score` - To achieve balanced `Precision` and `Recall` for the predictions
-  * `Accuracy` -  To achieve higher `True Positive` and `True Negative` rates
-  * `Class Wise F1 Score` - To track and understand how well the model discriminates between different classes. 
-* Apart from that we also used `Confusing Matrix` to understand each model's errors. 
+### 🧮 Performance Measure
+To evaluate and compare models, the following metrics were used:
+- **Weighted F1 Score**: To balance precision and recall.
+- **Accuracy**: To measure the percentage of correct predictions.
+- **Class-wise F1 Score**: To analyze performance for individual classes.
+- **Confusion Matrix**: To identify specific misclassifications and analyze errors. 
 
-### Data Transformation
-* Since the dataset was downloaded from `MNIST`, it just required `Normalization` before training and prediction. 
+### 🛠 Data Transformation
+The MNIST dataset was preprocessed using **Normalization** to scale pixel intensity values between 0 and 1.
 
-### Dataset
-* The `MNIST` dataset can be accessed from `sklearn` as follows
+### 📂 Dataset
+The MNIST dataset is directly accessible from `sklearn`:
 ```
 from sklearn.datasets import fetch_openml
 mnist = fetch_openml("mnist_784", as_frame=False)
 ```
 * The `train` and `test` set used for training and validation, as well as augmented data set can be accessed from public `Google Drive` folder [here](https://drive.google.com/drive/folders/10FmschultsicypMnWv-uI957F35P2ro5).
 
-### Notebooks
-* [00_get_data.ipynb](https://github.com/gaurangdave/mnist_digits_recognition/blob/main/notebooks/00_get_data.ipynb) to download the dataset and create local copy. <a href="https://colab.research.google.com/github/gaurangdave/mnist_digits_recognition/blob/main/notebooks/00_get_data.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+### 📒  Notebooks
+* [00_get_data.ipynb](https://github.com/gaurangdave/mnist_digits_recognition/blob/main/notebooks/00_get_data.ipynb) Download the dataset and save locally. <a href="https://colab.research.google.com/github/gaurangdave/mnist_digits_recognition/blob/main/notebooks/00_get_data.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 
-* [01_explore_data.ipynb](https://github.com/gaurangdave/mnist_digits_recognition/blob/main/notebooks/01_explore_data.ipynb) to create train/test set and data exploration.<a href="https://colab.research.google.com/github/gaurangdave/mnist_digits_recognition/blob/main/notebooks/01_explore_data.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+* [01_explore_data.ipynb](https://github.com/gaurangdave/mnist_digits_recognition/blob/main/notebooks/01_explore_data.ipynb) Data exploration and splitting the train/test set.<a href="https://colab.research.google.com/github/gaurangdave/mnist_digits_recognition/blob/main/notebooks/01_explore_data.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 
-* [02_training_evaluation_colab.ipynb](https://github.com/gaurangdave/mnist_digits_recognition/blob/main/notebooks/02_training_evaluation_colab.ipynb) for data training and evaluation on Google Colab.<a href="https://colab.research.google.com/github/gaurangdave/mnist_digits_recognition/blob/main/notebooks/02_transform_data.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+* [02_training_evaluation_colab.ipynb](https://github.com/gaurangdave/mnist_digits_recognition/blob/main/notebooks/02_training_evaluation_colab.ipynb) Model training and evaluation on Google Colab. <a href="https://colab.research.google.com/github/gaurangdave/mnist_digits_recognition/blob/main/notebooks/02_transform_data.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 
-* [03_training_evaluation_local.ipynb](https://github.com/gaurangdave/mnist_digits_recognition/blob/main/notebooks/03_training_evaluation_local.ipynb) for data training and evaluation on local machine.
+* [03_training_evaluation_local.ipynb](https://github.com/gaurangdave/mnist_digits_recognition/blob/main/notebooks/03_training_evaluation_local.ipynb) Model training and evaluation on a local machine.
 
-### Models
-* The production model that we use is app is trained using `Support Vector Classifier`, which gives us `Weighted F1 Score` of `0.981675` and `Accuracy` of `0.981679`. 
-* This model was trained using normalized data and the following hyperparams,
-  * `kernel` = `rbf`
-  * `C` = 10
-  * `gamma` = `scale`
+### 🧠 Model Insights
+Production Model:
+* **Algorithm**: Support Vector Classifier (SVC)
+* **Performance**:
+  * Weighted F1 Score: **0.98**
+  * Accuracy: **0.98**
+  * Class-wise average F1 Score: **0.98**
+* **Hyperparameters**:
+	* kernel: rbf
+	* C: 10
+	* gamma: scale
+	* Trained using normalized data.
+
+**Observations:**
+* The model performs well overall but struggles with specific misclassifications:
+* 53% of misclassified 6s are predicted as 0.
+* 54% of misclassified 4s are predicted as 9.
+* Digits like 3, 5, and 8 also have higher misclassification rates, likely due to their visual similarity.
+ 
 * All the trained models including the production one can be accessed in this public `Google Drive` [folder](https://drive.google.com/drive/folders/10GxWYi3NkoZv1Zba9yQ2y88TRM5-xKJG). 
-## Tech Stack
+
+## 💻 Tech Stack
 
 ![Environment](https://img.shields.io/badge/Environment-Google_Colab-FCC624?logo=googlecolab&style=for-the-badge)  
 ![Python](https://img.shields.io/badge/Python-3.12.2-FFD43B?logo=Python&logoColor=blue&style=for-the-badge)  
@@ -119,7 +135,10 @@ Important Notes:
 * Each user must add their own `SHARED_DRIVE_PATH` secret to run the code successfully.
 * If you’re collaborating with others, ensure everyone uses a consistent folder structure in their Google Drive.
 
-## Installation (For Local Development)
+
+## 💻 Running Locally
+
+### Install Dependencies
 
 - Create conda environment with `Python 3.12`
 
@@ -158,7 +177,7 @@ conda install conda-forge::python-dotenv
 ```bash
 conda install -c conda-forge fastapi uvicorn -y
 ```
-## Training Model for API
+### Training Model for API
 
 * Run the following command to train model(s) for production use
 
@@ -166,7 +185,7 @@ conda install -c conda-forge fastapi uvicorn -y
 python -m scripts.training
 ```
 
-## Running the API
+### Running the API
 * Run the following command to start the API server
 
 ```bash
@@ -178,7 +197,7 @@ uvicorn api.main:app --reload
 http://localhost:8000/docs
 ```
 
-## Running API Test Cases
+### Running API Test Cases
 * Run the following command to run all the test cases
 ```bash
 pytest
@@ -190,13 +209,13 @@ pytest
 pytest -k test_predict_digit_endpoint
 ```
 
-## API Reference
+### API Reference
 
 | Action                                           | HTTP Method | Endpoint                                 |
 |--------------------------------------------------|-------------|------------------------------------------|
 | Get predictions using                            | **`POST`**  | `/predict`                               |
 
-## Accessing UI
+### Accessing UI
 
 * To access the UI application, simply go to `http://localhost:8000` after starting the server and you should be able to access the webapp. 
 
@@ -227,14 +246,20 @@ pytest -k test_predict_digit_endpoint
   * Similarly there is higher rate of misclassification between 3, 5 and 8 and hypothesis is this could be because of similarity of these digits in hand written format. 
 
 ### Next Steps
-* Training a model using the augmented data to see if we can further improve the performance.  Right now training using augmented data, was resource intensive and didn't reach convergence for a long time. 
-* Experimenting with `Deep Learning` models. 
+1.	Train the model with augmented data to improve performance.
+2.	Explore deep learning models like CNNs for potentially better accuracy.
 
 ## Lessons Learnt
-* Gained experience in `Classification Algorightm`, various classification performance metrics and error analytics.
-* Leart about data exploration for image data in `pixels` and `intencities`.
-* Got familiarity with concepts `Kernel Trick` and fitting linear vs non linear data. 
-* Ran into a very interesting bug while using the final model in production, and learnt how a fit and transform in production pipeline can result into prediction errors. 
+* Improved understanding of **classification algorithms**, metrics, and error analysis.
+* Learned data exploration techniques for image data.
+* Debugged and resolved a production issue with the normalization pipeline, gaining valuable insight into E2E system testing.
+* Familiarity with the **kernel trick** and its role in handling linear vs non-linear data.
+
+## 🌟 Project Highlights
+1. End-to-End Application:
+* Includes a model training pipeline, API, and a front-end interface.
+2. User Interaction:
+* Users can draw digits on a canvas and get predictions in real time.
 
 ## 🚀 About Me
 
