@@ -67,6 +67,7 @@ const readCanvasData = () => {
 document.getElementById("clear-button").addEventListener("click", () => {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = "black"; // Black background
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
     ctx.beginPath();
 });
 
