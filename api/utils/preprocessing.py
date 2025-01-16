@@ -24,8 +24,6 @@ def preprocess_data(data, method="none", threshold=128):
         scaler = MinMaxScaler()
         transformed_data = scaler.fit_transform(data)
         transfored_df = pd.DataFrame(transformed_data)
-        print(f"transfored_df Min: {transfored_df.min().min()}, Max: {
-              transfored_df.max().max()}")
         return transfored_df
     elif method == "binarize":
         binarizer = Binarizer(threshold=threshold)
@@ -48,11 +46,6 @@ def convert_prediction_request_to_dataframe(data: DigitData):
     input_data = {f"pixel{i+1}": v for i, v in enumerate(flattened_pixels)}
     df = pd.DataFrame([input_data])
 
-    # Debug prints
-    print("DataFrame shape:", df)
-    print("Sample of first 10 pixels:", df.iloc[0, :10].values)
-    print("Number of non-zero pixels:", (df != 0).sum().sum())
-
     # Save the exact DataFrame we'll use for prediction
     prediction_request_file = Path(
         "api", "data", "user_prediction_request.csv")
@@ -62,7 +55,7 @@ def convert_prediction_request_to_dataframe(data: DigitData):
         df.to_csv(prediction_request_file, mode="w", header=True, index=False)
 
     # # Verify the data is in the correct format for the model
-    # if df.shape[1] != 784:
-    #     raise ValueError(f"Expected 784 features, got {df.shape[1]}")
+    if df.shape[1] != 784:
+        raise ValueError(f"Expected 784 features, got {df.shape[1]}")
 
     return df

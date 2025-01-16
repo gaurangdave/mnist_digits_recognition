@@ -30,10 +30,8 @@ def test_predict_digit_with_valid_input():
     pixels = test_image.drop("class", axis=1).values.tolist()
     # get the target
     target = test_image["class"].values[0]
-    print("Target: ", target)
     payload = {"pixels": pixels}
     response = client.post("/predict", json=payload)
     assert response.status_code == 200
     assert "prediction" in response.json()
-
     assert response.json()["prediction"] == target
