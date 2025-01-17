@@ -254,10 +254,10 @@ pytest -k test_predict_digit_endpoint
 1.	**Machine Learning Concepts:**
     * Gained a deeper understanding of classification algorithms (e.g., Logistic Regression, SVC, Random Forest, KNN), their **hyperparameters**, and their impact on model performance.
     * Explored **classification metrics** like F1 Score, ROC-AUC, and confusion matrices, and learned how to interpret them for effective model evaluation.
-2.	Data Exploration & Engineering:
+2.	**Data Exploration & Engineering:**
     * Learned techniques to analyze image datasets, including pixel intensity distributions and feature variability
     * Debugged issues related to preprocessing pipelines in production and gained insight into handling **fit vs transform pitfalls**.
-3.	End-to-End Workflow:
+3.	**End-to-End Workflow:**
     * Integrated the model into a **production-ready API** using FastAPI and created a front-end interface for real-time interaction with the model.
     * Realized the importance of **E2E testing**, as it uncovered potential bugs that wouldn’t have been apparent during model evaluation on test data.
     
