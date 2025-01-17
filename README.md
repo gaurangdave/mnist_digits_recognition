@@ -1,16 +1,17 @@
 # MNIST Digits Recognition
 
-## 📌 Project Goal
 
-The goal of this project is to build an **end-to-end application** for recognizing handwritten digits using the MNIST dataset.
+## 🎯 Project Goal
 
-Key Features:
+Guided by examples and techniques from the book *Hands-On Machine Learning with Scikit-Learn, Keras, and TensorFlow*, this project explores essential steps in the ML pipeline—from data preprocessing and feature engineering to model training, evaluation, and deployment as an end-to-end application.
+
+The goal of this project is to build an end-to-end application that recognizes handwritten digits using the MNIST dataset. The application will allow users to draw digits (or provide handwritten digit images) and predict the digit using a trained machine learning model. This involves:
 1. **Model Training** : A machine learning model is trained to recognize digits (0-9) from the MNIST dataset.
 2. **Interactive Web Application** :
 	* Users can draw a handwritten digit using a canvas or upload an image.
 	* The application predicts the digit based on the trained model.
 
-## 🎯 Solution Details
+## ✅ Solution Details
 
 ### 🧮 Performance Measure
 To evaluate and compare models, the following metrics were used:
@@ -250,11 +251,16 @@ pytest -k test_predict_digit_endpoint
 2.	Explore deep learning models like CNNs for potentially better accuracy.
 
 ## 🏫 Lessons Learnt
-* Improved understanding of **classification algorithms**, metrics, and error analysis.
-* Learned data exploration techniques for image data.
-* Debugged and resolved a production issue with the normalization pipeline, gaining valuable insight into E2E system testing.
-* Familiarity with the **kernel trick** and its role in handling linear vs non-linear data.
-
+1.	**Machine Learning Concepts:**
+    * Gained a deeper understanding of classification algorithms (e.g., Logistic Regression, SVC, Random Forest, KNN), their **hyperparameters**, and their impact on model performance.
+    * Explored **classification metrics** like F1 Score, ROC-AUC, and confusion matrices, and learned how to interpret them for effective model evaluation.
+2.	Data Exploration & Engineering:
+    * Learned techniques to analyze image datasets, including pixel intensity distributions and feature variability
+    * Debugged issues related to preprocessing pipelines in production and gained insight into handling **fit vs transform pitfalls**.
+3.	End-to-End Workflow:
+    * Integrated the model into a **production-ready API** using FastAPI and created a front-end interface for real-time interaction with the model.
+    * Realized the importance of **E2E testing**, as it uncovered potential bugs that wouldn’t have been apparent during model evaluation on test data.
+    
 ## 🌟 Project Highlights
 1. End-to-End Application:
 * Includes a model training pipeline, API, and a front-end interface.
