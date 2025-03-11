@@ -6,15 +6,15 @@ MODELS_DIR_PATH = Path("models")
 DATA_DIR_PATH = Path("data")
 
 
-def download_data_from_gdrive():
+def download_data_from_gdrive(data_dir=DATA_DIR_PATH):
     # check if DATA_DIR_PATH exists else create it
-    if not DATA_DIR_PATH.exists():
-        print(f"Creating data directory...{DATA_DIR_PATH}")
-        DATA_DIR_PATH.mkdir(parents=True, exist_ok=True)
+    if not data_dir.exists():
+        print(f"Creating data directory...{data_dir}")
+        data_dir.mkdir(parents=True, exist_ok=True)
 
     # download data from gdrive folder
     gdown.download_folder(
-        url="https://drive.google.com/drive/folders/10FmschultsicypMnWv-uI957F35P2ro5?usp=sharing", output=str(DATA_DIR_PATH), quiet=False)
+        url="https://drive.google.com/drive/folders/10FmschultsicypMnWv-uI957F35P2ro5?usp=sharing", output=str(data_dir), quiet=False)
     print("Data downloaded successfully!")
 
 
