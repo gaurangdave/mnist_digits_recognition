@@ -254,10 +254,15 @@ pytest -k test_predict_digit_endpoint
 ## 📈 Visualizations
 
 ### Metric Comparison Of Various Models
+![comparing_f1_accuracy](https://github.com/user-attachments/assets/a190fa6a-d4e3-4c7a-b198-85142d852370)
+
 
 ### Class-wise F1 Score Heatmap
+![comparing_class_based_f1](https://github.com/user-attachments/assets/eedf2696-d173-4c58-9ced-0e973a0017e4)
+
 
 ### Class-wise F1 Score Distribution
+![class_wise_f1_distribution](https://github.com/user-attachments/assets/558bdf70-b743-40fa-bfee-4c62c590b339)
 
 ### Confusion Matrix for Production Model against test data
 ![test_validation](https://github.com/user-attachments/assets/5ff76a3b-9bf8-40bb-8582-3fefdcfd3170)
