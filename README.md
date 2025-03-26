@@ -40,6 +40,16 @@ mnist = fetch_openml("mnist_784", as_frame=False)
 
 * [03_training_evaluation_local.ipynb](https://github.com/gaurangdave/mnist_digits_recognition/blob/main/notebooks/03_training_evaluation_local.ipynb) Model training and evaluation on a local machine.
 
+* [04_training_augmented_data.ipynb](https://github.com/gaurangdave/mnist_digits_recognition/blob/main/notebooks/04_training_augmented_data.ipynb) Training `SVC` on augmented data.
+
+* [05_testing_prod_model.ipynb](https://github.com/gaurangdave/mnist_digits_recognition/blob/main/notebooks/05_testing_prod_model.ipynb) Sanity testing production models.
+
+* [06_ensemble_learning.ipynb](https://github.com/gaurangdave/mnist_digits_recognition/blob/main/notebooks/06_ensemble_learning.ipynb) Experimenting with various ensemble learning techniques.
+
+* [07_huggingface_integration.ipynb](https://github.com/gaurangdave/mnist_digits_recognition/blob/main/notebooks/07_huggingface_integration.ipynb) Hugging face integration.
+
+* [08_model_performance_analysis.ipynb](https://github.com/gaurangdave/mnist_digits_recognition/blob/main/notebooks/08_model_performance_analysis.ipynb) Analysing various model performances.
+
 ### 🧠 Model Insights
 Production Model:
 * **Algorithm**: Support Vector Classifier (SVC)
