@@ -44,9 +44,9 @@ mnist = fetch_openml("mnist_784", as_frame=False)
 Production Model:
 * **Algorithm**: Support Vector Classifier (SVC)
 * **Performance**:
-  * Weighted F1 Score: **0.98**
-  * Accuracy: **0.98**
-  * Class-wise average F1 Score: **0.98**
+  * Weighted F1 Score: **~0.99**
+  * Accuracy: **~0.99**
+  * Class-wise average F1 Score: **~0.99**
 * **Hyperparameters**:
 	* kernel: rbf
 	* C: 10
@@ -59,7 +59,16 @@ Production Model:
 * 54% of misclassified 4s are predicted as 9.
 * Digits like 3, 5, and 8 also have higher misclassification rates, likely due to their visual similarity.
  
-* All the trained models including the production one can be accessed in this public `Google Drive` [folder](https://drive.google.com/drive/folders/10GxWYi3NkoZv1Zba9yQ2y88TRM5-xKJG). 
+### 📈 Latest Experiments:
+* Augmented original training data with shifted versions of each digit to simulate new samples.
+* Trained and compared various **ensemble learning techniques**:
+  * **Voting Classifier**: Hard and Soft Voting
+  * **Blending**: Using Logistic Regression, Gradient Boosting, Random Forest, and SVC as final estimators
+* Performed **feature importance analysis** on blended models to identify contributing models
+* Conducted **feature engineering** experiments with top-N model outputs as inputs to the blender to find a sweet spot between diversity and redundancy
+* Final evaluation showed **SVC with augmented data consistently outperformed others**, with Gradient Boosting and Random Forest-based blenders as close seconds.
+
+* All models including ensemble variations and production SVC can be found [here](https://huggingface.co/gaurangdave/mnist_digits_recognition)
 
 ## 💻 Tech Stack
 
@@ -168,6 +177,13 @@ conda install -c conda-forge python-kaleido
 conda install conda-forge::gdown
 ```
 
+- Install HuggingFace
+```bash
+conda install conda-forge::huggingface_hub
+```
+
+
+
 - Install DotEnv
 ```bash
 conda install conda-forge::python-dotenv
@@ -178,6 +194,13 @@ conda install conda-forge::python-dotenv
 ```bash
 conda install -c conda-forge fastapi uvicorn -y
 ```
+
+### Setup HuggingFace
+* Create a `.env` file in the root directory and save the `HuggingFace` API Key as `HF_TOKEN`
+```bash
+HF_TOKEN="your_hugging_face_token"
+```
+
 ### Training Model for API
 
 * Run the following command to train model(s) for production use
@@ -231,7 +254,10 @@ pytest -k test_predict_digit_endpoint
 ## 📈 Visualizations
 
 ### Metric Comparison Of Various Models
-![image](https://github.com/user-attachments/assets/e1f295d4-3dcf-4aa0-b5f3-dd30a1f61186)
+
+### Class-wise F1 Score Heatmap
+
+### Class-wise F1 Score Distribution
 
 ### Confusion Matrix for Production Model against test data
 ![test_validation](https://github.com/user-attachments/assets/5ff76a3b-9bf8-40bb-8582-3fefdcfd3170)
@@ -247,8 +273,14 @@ pytest -k test_predict_digit_endpoint
   * Similarly there is higher rate of misclassification between 3, 5 and 8 and hypothesis is this could be because of similarity of these digits in hand written format. 
 
 ### 👣 Next Steps
-1.	Train the model with augmented data to improve performance.
-2.	Explore deep learning models like CNNs for potentially better accuracy.
+- [X] Train the model with augmented data to improve performance.
+- [ ] Explore digit-specific augmentation or oversampling for digits with lower F1 scores.
+- [ ] Investigate model-specific confusion matrices to understand digit confusion patterns.
+- [ ] Try deep learning approaches (CNNs) to push performance further.
+
+## 🧪 Model Selection Rationale
+* While many models performed well, **SVC with augmented data** offers the best trade-off between performance and simplicity.
+* Blending with top models also gives excellent performance and can be retained for future experimentation or production.
 
 ## 🏫 Lessons Learnt
 1.	**Machine Learning Concepts:**
@@ -279,3 +311,4 @@ A jack of all trades in software engineering, with 15 years of crafting full-sta
 ## 🛠 Skills
 
 `Python`, `Jupyter Notebook`, `scikit-learn`, `FastAPI`, `Plotly`, `Conda`
+

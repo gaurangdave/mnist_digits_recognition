@@ -5,13 +5,20 @@ from sklearn.svm import SVC
 from pathlib import Path
 
 import pandas as pd
+from datetime import datetime
 
 # helper function to train the Support Vector Classifier (SVC) model
 
 
-def train_svc(features, target):
+def train_svc(features, target, model_name):
     """ Train a Support Vector Classifier (SVC) model on the input data.
     """
+    
+    ## if no model name is provided, use the default name with timestamp
+    if model_name is None:
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        model_name = f"svc_prod_{timestamp}.joblib"
+    
     # Best Parameters: {'svc__C': 10, 'svc__gamma': 'scale', 'svc__kernel': 'rbf'}
     # initialize SVC
     svc = SVC(random_state=42, C=10, gamma="scale",
@@ -36,8 +43,8 @@ def download_data():
     # check if mnist data is already downloaded
     mnist_train_set_path = Path("data", "mnist_train_set.csv")
     mnist_test_set_path = Path("data", "mnist_test_set.csv")
-    augmented_train_X_set_path = Path("..", "data", "augmented_train_X.csv")
-    augmented_train_Y_set_path = Path("..", "data", "augmented_train_Y.csv")
+    augmented_train_X_set_path = Path("data", "augmented_train_X.csv")
+    augmented_train_Y_set_path = Path( "data", "augmented_train_Y.csv")
 
     if not mnist_train_set_path.exists():
         print("Downloading MNIST training data...")
@@ -93,14 +100,14 @@ if __name__ == "__main__":
     test_X = mnist_test_set.drop("class", axis=1)
     test_Y = mnist_test_set["class"]
 
-    # train the model
-    print("Intializing SVC using the best params and regular data...")
-    train_svc(train_X, train_Y)
+    # # train the model
+    # print("Intializing SVC using the best params and regular data...")
+    # train_svc(train_X, train_Y, model_name="svc_prod_v3.joblib")
 
-    # train the model
-    print("Intializing SVC using the best params and regular data...")
-    train_svc(train_X, train_Y)
+    # # train the model
+    # print("Intializing SVC using the best params and regular data...")
+    # train_svc(train_X, train_Y)
 
     # train the model
     print("Intializing SVC using the best params and augmented data...")
-    train_svc(augmented_train_X, augmented_train_Y)
+    train_svc(augmented_train_X, augmented_train_Y, model_name="svc_prod.joblib")
